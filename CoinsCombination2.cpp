@@ -1,15 +1,10 @@
 /*
-Consider a money system consisting of n coins. Each coin has a positive integer value. Your task is to calculate the number of distinct ways you can produce a money sum x using the available coins.
-For example, if the coins are \{2,3,5\} and the desired sum is 9, there are 8 ways:
+Consider a money system consisting of n coins. Each coin has a positive integer value. Your task is to calculate the number of distinct ordered ways you can produce a money sum x using the available coins.
+For example, if the coins are \{2,3,5\} and the desired sum is 9, there are 3 ways:
 
 2+2+5
-2+5+2
-5+2+2
 3+3+3
 2+2+2+3
-2+2+3+2
-2+3+2+2
-3+2+2+2
 
 Input
 The first input line has two integers n and x: the number of coins and the desired sum of money.
@@ -35,13 +30,10 @@ int main(){
     for(int i = 0;i < n;i +=1){
         std::cin>>coins[i];
     }
-    // std::sort(coins.begin(),coins.end());
+    std::sort(coins.begin(),coins.end());
     arr[0] = 1;
-    for(size_t i = 1;i <= x;i +=1){
-        for(auto c:coins){
-            if(c > i){
-                continue;
-            }
+    for(auto c:coins){
+        for(size_t i = c;i <= x;i +=1){
             arr[i] = (arr[i] + arr[i - c])%MOD;
         }
         // std::cout<<i<<" "<<arr[i]<<"\n";
